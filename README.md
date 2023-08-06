@@ -12,8 +12,8 @@ npm install package-fetcher
 ```js
 const package = require('package-fetcher');
 const data = package.fetchInfo('express');
-console.log(data.name)
-console.log(data.description)
+console.log(data.name);
+console.log(data.description);
 ```
 ## Properties
 + **.name** - Returns the package name.
