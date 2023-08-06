@@ -31,6 +31,7 @@ console.log(data.description);
 + **.modified** - Returns the time when package was last modified _(both ISO and timestamp)_
   + _.iso - Returns the ISO time when package was last modified_
   + _.timestamp - Returns the timestamp when package was last modified_
+> However, if you don't specify a property it will return the entire JSON.
   
 ## Limitations
 + **Synchronous Nature**: Using `sync-request` can lead to performance bottlenecks and application delays.
