@@ -8,6 +8,8 @@ function getInfo(name) {
     data.version = data['dist-tags'].latest;
     data.name = data.name;
     data.author = data.author.name;
+    data.maintainers = data.maintainers.map(user => user.name);
+    data.keywords = data.keywords
     data.description = data.description;
     data.downloadsLastWeek = JSON.parse(req('GET', `https://api.npmjs.org/downloads/point/last-week/${name}`).getBody('utf-8')).downloads;
     data.downloadsLastMonth = JSON.parse(req('GET', `https://api.npmjs.org/downloads/point/last-month/${name}`).getBody('utf-8')).downloads;
@@ -20,8 +22,10 @@ function getInfo(name) {
     return {
       name: data.name,
       author: data.author,
+      maintainers: data.maintainers,
       description: data.description,
       version: data.version,
+      keywords: data.keywords,
       downloads: {lastWeek: data.downloadsLastWeek, lastMonth: data.downloadsLastMonth, lastYear: data.downloadsLastYear},
       created: {iso: data.createdAt, timestamp: data.createdAtTimestamp},
       modified: {iso: data.modifiedAt, timestamp: data.modifiedAtTimestamp}
