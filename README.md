@@ -21,6 +21,7 @@ console.log(data.description);
 + **.author** - Returns the package author.
 + **.maintainers** - Returns the package maintainers.
 + **.version** - Returns the latest package version.
++ **.keywords** - Returns the package keywords.
 + **.downloads** - Returns download counts _(for the last week, last month, and last year)_
   + _.lastWeek - Only returns the download count from the last 7 days._
   + _.lastMonth - Only returns the download count from the last month._

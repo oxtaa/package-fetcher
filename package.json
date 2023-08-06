@@ -1,6 +1,6 @@
 {
   "name": "package-fetcher",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Designed to fetch information directly from the NPM registry for other NPM packages.",
   "main": "index.js",
   "keywords": [
