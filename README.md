@@ -3,7 +3,7 @@ Designed to fetch information directly from the NPM registry for other NPM packa
 ## Table of contents
 + **[Installation & Example](#installation)**
 + **[Properties](#properties)**
-+ **[Limitations](#limitations)**
++ **[Keep in mind](#keep-in-mind-that)**
 ## Installation
 ```bash
 npm install package-fetcher
@@ -11,9 +11,12 @@ npm install package-fetcher
 ### Example
 ```js
 const package = require('package-fetcher');
-const data = package.fetchInfo('express');
-console.log(data.name);
-console.log(data.description);
+
+(async () => {
+    const data = await package.fetchInfo('moment');
+    console.log(data.name);
+    console.log(data.description);
+})();
 ```
 ## Properties
 + **.name** - Returns the package name.
@@ -33,11 +36,6 @@ console.log(data.description);
   + _.iso - Returns the ISO time when package was last modified_
   + _.timestamp - Returns the timestamp when package was last modified_
 > However, if you don't specify a property it will return the entire JSON.
-  
-## Limitations
-+ **Synchronous Nature**: Using `sync-request` can lead to performance bottlenecks and application delays.
-
-+ **Dependency on `sync-request`**: `sync-request` might not be compatible with all environments and could impact the overall performance of your project.
 
 ### Keep in mind that
 Occasionally, the package may encounter failures when attempting to fetch package information from the NPM registry, this is a bug that i'll try to solve for future updates.
