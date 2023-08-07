@@ -1,9 +1,12 @@
-const req = require('sync-request');
+const req = require('axios');
 
-function getInfo(name) {
+async function fetchInfo(name) {
   try {
-    const r = req('GET', `https://registry.npmjs.com/${name}`);
-    const data = JSON.parse(r.getBody('utf-8'));
+    const r = await req.get(`https://registry.npmjs.com/${name}`);
+    const data = r.data;
+    const thisWeek = await req.get(`https://api.npmjs.org/downloads/point/last-week/${name}`);
+    const thisMonth = await req.get(`https://api.npmjs.org/downloads/point/last-month/${name}`);
+    const thisYear = await req.get(`https://api.npmjs.org/downloads/point/last-year/${name}`);
 
     data.version = data['dist-tags'].latest;
     data.name = data.name;
@@ -11,9 +14,9 @@ function getInfo(name) {
     data.maintainers = data.maintainers.map(user => user.name);
     data.keywords = data.keywords
     data.description = data.description;
-    data.downloadsLastWeek = JSON.parse(req('GET', `https://api.npmjs.org/downloads/point/last-week/${name}`).getBody('utf-8')).downloads;
-    data.downloadsLastMonth = JSON.parse(req('GET', `https://api.npmjs.org/downloads/point/last-month/${name}`).getBody('utf-8')).downloads;
-    data.downloadsLastYear = JSON.parse(req('GET', `https://api.npmjs.org/downloads/point/last-year/${name}`).getBody('utf-8')).downloads;
+    data.downloadsLastWeek = thisWeek.data.downloads;
+    data.downloadsLastMonth = thisMonth.data.downloads;
+    data.downloadsLastYear = thisYear.data.downloads;
     data.createdAt = data.time.created;
     data.modifiedAt = data.time.modified;
     data.createdAtTimestamp = Math.trunc(Date.parse(data.time.created) / 1000);
@@ -35,4 +38,4 @@ function getInfo(name) {
   }
 }
 
-module.exports = { getInfo };
+module.exports = { fetchInfo };
