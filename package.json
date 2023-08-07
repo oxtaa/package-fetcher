@@ -1,6 +1,6 @@
 {
   "name": "package-fetcher",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Designed to fetch information directly from the NPM registry for other NPM packages.",
   "main": "index.js",
   "keywords": [
@@ -15,6 +15,6 @@
   "author": "oxta.",
   "license": "ISC",
   "dependencies": {
-    "sync-request": "^6.1.0"
+    "axios": "^1.4.0"
   }
 }
